@@ -1,0 +1,21 @@
+<view class="container2">
+  <view bindtap="box" class="box">
+    <view 
+          wx:key="unique"
+          disable-scroll="true" 
+          wx:for="{{content}}" 
+          data-main="{{mainx}}" 
+          class="main {{mainx == item.id? 'mainmove':'mainend'}}" 
+          style="left:{{start.x}}px; top:{{start.y}}px">
+              <view 
+                data-index="{{item.id}}" 
+                class='tttttttttttttt'
+                bindtouchmove="move" 
+                bindtouchstart="movestart"
+                bindtouchend="moveend" 
+              >{{item.content}}</view>
+              <view class='edit'>编辑</view>
+              <view class='delete'>删除</view>
+      </view>
+  </view>
+</view>

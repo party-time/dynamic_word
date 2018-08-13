@@ -1,0 +1,80 @@
+/* pages/audio.wxss */
+.vedioContent{
+    z-index: 2;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display:flex; 
+    flex-direction:column;
+    overflow:hidden;
+}
+
+
+.vedioContent .content{
+    height:85%;
+    width:100%;
+}
+
+.vedioContent .content .contentList{
+    overflow:scroll; 
+    height: 100%;
+    background-color: lightgrey;
+    width:100%;
+    padding-left: 10rpx;
+}
+
+.vedioContent .content .contentList .wordView{
+    display:flex; 
+    flex-direction:row;
+    align-items: center;
+    width:100%;
+    border-bottom: solid 1px gray;
+    height: 80rpx;
+}
+.vedioContent .content .contentList .wordView .word{
+    width: 75%;
+}
+
+.vedioContent .content .contentList .wordView .edit{
+    width: 100rpx;
+}
+
+.vedioContent .content .contentList .wordView .delete{
+    width: 100rpx;
+}
+
+.mainmove {
+  position: absolute;
+  opacity: 0.7;
+}
+
+.maind {
+  background: #fff;
+  border: 1px dashed #efefef;
+}
+
+.mainend {
+  position: static;
+  opacity: 1;
+}
+
+.audioView{
+    height: 15%;
+}
+
+.audioView .audioContentView{
+    height: 100%;
+    background-color: lightyellow;
+
+    display: flex;
+    flex-direction:row;
+    align-items:center;
+}
+.audioView .audioContentView .vedio{
+    width: 60px;      
+    height: 60px;      
+    background-color:red;    
+    border-radius: 50%;     
+    -moz-border-radius: 50%;      
+    -webkit-border-radius: 50%;
+}

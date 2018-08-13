@@ -1,0 +1,24 @@
+<!--index.wxml-->
+<view class="vedioContent">
+
+    <view class='content'>
+      <view class='contentList'>
+          <view wx:for="{{doommData}}" 
+                wx:key="id" 
+                class='wordView'>
+              <view class='word'>{{item.text}}</view>
+              <view class='edit'>编辑</view>
+              <view class='delete'>删除</view>
+          </view>
+      </view>
+    </view>
+    <view class='audioView'>
+        <view class='audioContentView'>
+          <button
+                  bindtouchstart="startRecode" 
+                  bindtouchend="endRecode" 
+                  class="vedio">
+          </button>    
+        </view>
+    </view>
+</view>
