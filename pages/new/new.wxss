@@ -31,12 +31,20 @@
 
 .container .content .main  .word{
     width: 75%;
+    text-align: left;
+    border: 1rpx dashed lightgreen;
+    padding-left: 5rpx;
 }
-
+.container .content .main .word .input{
+  background-color:white;
+  height: 100%;
+  width: 100%;
+  text-align: left;
+  padding-left: 5rpx;
+}
 .container .content .main  .edit{
     width: 100rpx;
 }
-
 .container .content .main .delete{
     width: 100rpx;
 }
@@ -57,23 +65,40 @@
 }
 
 .audioView{
-    border: 1px dashed #efefef;
+    border: 1px solid #efefef;
     height: 10%;
+    width: 100%;
+    display: flex;
+    flex-direction:row;
+    align-items: center;
 }
 
-.audioView .audioContentView{
+.audioView .audioContentViewLeft{
     height: 100%;
+    width: 60%;
     background-color: lightyellow;
 
     display: flex;
-    flex-direction:row;
-    align-items:center;
+    flex-direction:row-reverse;
+    align-items: center;
+
 }
-.audioView .audioContentView .vedio{
-    width: 50px;      
-    height: 50px;      
+.audioView .audioContentViewLeft .vedio{
+    width: 100rpx;      
+    height: 100rpx;      
     background-color:red;    
     border-radius: 50%;     
     -moz-border-radius: 50%;      
     -webkit-border-radius: 50%;
+}
+
+.audioView .audioContentViewRight{
+    height: 100%;
+    width: 40%;
+    background-color: lightyellow;
+
+    display: flex;
+    flex-direction:row;
+    align-items: center;
+    justify-content:center;
 }

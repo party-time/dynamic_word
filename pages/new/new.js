@@ -40,8 +40,14 @@ Page({
     });
     array = [];
 
+    /*for(var i=0; i<10; i++){
+      
+      console.log('id============='+id)
+      array.push({id:id,content:"content"+i})
+      id = parseInt(id + 1);
+    }*/
     this.setData({
-      content: array
+      content:[]
     })
   },
 
@@ -93,7 +99,58 @@ Page({
   onShareAppMessage: function () {
   
   },
-  movestart: function (e) {
+  editBegin:function(e){
+    var tempArray = [];
+    console.log('------------------' + e.target.dataset.index);
+    var index = e.target.dataset.index;
+    if (array != null && array.length > 0) {
+      for (var i = 0; i < array.length; i++) {
+        var tempObject = array[i];
+        if (index == tempObject.id) {
+          tempObject.isEdit = true;
+        }
+        tempArray.push(tempObject);
+      }
+    }
+    this.setData({
+      content: tempArray
+    })
+
+  },
+  editFinsh: function (e) {
+    var tempArray = [];
+    console.log('------------------' + e.target.dataset.index);
+    var index = e.target.dataset.index;
+    if (array != null && array.length > 0) {
+      for (var i = 0; i < array.length; i++) {
+        var tempObject = array[i];
+        if (index == tempObject.id) {
+          tempObject.isEdit = false;
+        }
+        tempArray.push(tempObject);
+      }
+    }
+    this.setData({
+      content: tempArray
+    })
+
+  },
+  deleteContent:function(e){
+    console.log('------------------' + e.target.dataset.index);
+    var index = e.target.dataset.index;
+    if(array!=null && array.length>0){
+        for(var i=0; i<array.length; i++){
+          var tempObject = array[i];
+          if(index == tempObject.id){
+            array.splice(i, 1);
+          }
+        }
+    }
+    this.setData({
+      content: array
+    })
+
+  },movestart: function (e) {
     console.log('movestart')
     currindex = e.target.dataset.index;
 
@@ -141,8 +198,6 @@ Page({
       for (var i = 0; i < this.data.content.length; i++) {
         arr.push(this.data.content[i]);
       }
-
-
       var nx = this.data.content.length;
       n = 1;
       for (var k = 2; k < nx; k++) {

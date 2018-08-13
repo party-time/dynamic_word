@@ -10,22 +10,44 @@
               style="left:{{start.x}}px; top:{{start.y}}px">
                   <view 
                     data-index="{{item.id}}" 
+                    wx:if="{{!item.isEdit}}"
                     class='word'
                     bindtouchmove="move" 
                     bindtouchstart="movestart"
-                    bindtouchend="moveend" 
-                  >{{item.content}}</view>
-                  <view class='edit'>编辑</view>
-                  <view class='delete'>删除</view>
+                    bindtouchend="moveend" >{{item.content}}
+                    </view>
+
+                    <view data-index="{{item.id}}" 
+                    wx:if="{{item.isEdit}}"
+                    class='word' >
+                    <input class="input"
+                            placeholder="请输入内容"
+                            value='{{item.content}}'
+                            bindinput="passWdInput" />
+                    </view>
+
+                  <view class='edit' 
+                        bindtap='editBegin' 
+                        wx:if="{{!item.isEdit}}" 
+                        data-index="{{item.id}}">编辑</view>
+                  <view class='edit' 
+                        bindtap='editFinsh' 
+                        wx:if="{{item.isEdit}}" 
+                        data-index="{{item.id}}">确定</view>
+                  <view class='delete' 
+                        bindtap='deleteContent' 
+                        data-index="{{item.id}}">删除</view>
           </view>
     </view>
     <view class='audioView'>
-        <view class='audioContentView'>
-          <button
-                  bindtouchstart="startRecode" 
-                  bindtouchend="endRecode" 
-                  class="vedio">
-          </button>    
+        <view class='audioContentViewLeft'>
+          <view bindtouchstart="startRecode" 
+                bindtouchend="endRecode" 
+                class="vedio">
+          </view>
+        </view>
+        <view class='audioContentViewRight'>
+            <view>完成</view>
         </view>
     </view>
 </view>
