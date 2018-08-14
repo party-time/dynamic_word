@@ -1,11 +1,15 @@
+<view class="mask">
+</view>
+
+
 <view wx:key="unique" disable-scroll="true" wx:for="{{content}}" >
     <block  wx:if="{{item.type==0}}">
       <view class="turnLeft" >
         <block wx:key="unique" wx:for="{{item.paragraphArray}}" wx:for-index="index" wx:for-item="paragraph">
-          <view class="danmuText {{paragraph.animate}}" wx:if="{{index==0}}" wx:key="unique" style="--height:300px;color:{{paragraph.color}};font-size:{{paragraph.size}};margin-top:{{paragraph.marginTop}}" >
+          <view id="{{paragraph.did}}" class="danmuText {{paragraph.animate}} moveTop" wx:if="{{index==0}}" wx:key="unique" style="color:{{paragraph.color}};font-size:{{paragraph.size}};margin-top:{{paragraph.marginTop}};--div_height:{{paragraph.moveTop}}" >
         {{paragraph.info}}
           </view>
-          <view class="danmuText {{paragraph.animate}}" wx:if="{{index>0}}" wx:key="unique" style="color:{{paragraph.color}};font-size:{{paragraph.size}};margin-top:{{paragraph.marginTop}}" >
+          <view id="{{paragraph.did}}" class="danmuText {{paragraph.animate}}" wx:if="{{index>0}}" wx:key="unique" style="color:{{paragraph.color}};font-size:{{paragraph.size}};margin-top:{{paragraph.marginTop}};" >
         {{paragraph.info}}
           </view>
         </block>

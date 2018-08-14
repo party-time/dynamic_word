@@ -8,6 +8,14 @@ page {
     font-weight:900;
 }
 
+.mask {
+    width:100%;
+    height:100%;
+    position:absolute;
+    z-index:100;
+    background-color:#000;
+}
+
 @keyframes bounceInRight {
   from,
   60%,
@@ -155,6 +163,6 @@ page {
   from{
   }
   to{
-    margin-top:var(--height);
+    margin-top:var(--div_height);
   }   
 }

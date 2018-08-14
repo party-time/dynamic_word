@@ -54,9 +54,9 @@ Page({
 
     audioList.push('http://test.party-time.cn/voice/guahaizi.mp3');
     audioList.push('http://test.party-time.cn/voice/haohao.mp3');
-    audioList.push('http://test.party-time.cn/voice/mamaduiwoshuo.mp3');
-    audioList.push('http://test.party-time.cn/voice/mingtiannadiyi.mp3');
-    audioList.push('http://test.party-time.cn/voice/yiwankuai.mp3');
+    //audioList.push('http://test.party-time.cn/voice/mamaduiwoshuo.mp3');
+    //audioList.push('http://test.party-time.cn/voice/mingtiannadiyi.mp3');
+    //audioList.push('http://test.party-time.cn/voice/yiwankuai.mp3');
     let father = this;
     audioCtx.autoplay = true;
     
@@ -70,8 +70,8 @@ Page({
     })
     audioCtx.onEnded(() => {
       if (audioList.length>0){
-        audioCtx.src = audioList.shift();
-        drawDWord(father);
+        //audioCtx.src = audioList.shift();
+        //drawDWord(father);
       }
       console.log('播放结束')
     })
@@ -81,7 +81,7 @@ Page({
       father.setData({
         content: pvList
       })
-      audioCtx.src = audioList.shift();
+      //audioCtx.src = audioList.shift();
     }, 1000);
   
   },
@@ -146,6 +146,9 @@ var drawDWord = function (father) {
   if (null == dWord) {
     return;
   }
+  var time = new Date().getTime();
+  var bid = 'barrage_' + time;
+  dWord.did = bid;
   ++msgCount;
   if (msgCount==1){
     var tempList = new Array();
@@ -153,6 +156,7 @@ var drawDWord = function (father) {
     tempList.push(dWord);
     var pv = new pageView(tempList, 0);
     pvList.push(pv);
+    drawDWord(father);
   }else{
     if(dWord.type==0){
 
@@ -160,7 +164,9 @@ var drawDWord = function (father) {
 
     }else{
       dWord.marginTop = '20px';
+      //pvList[pvList.length - 1].paragraphArray[0].moveTop=
       pvList[pvList.length - 1].paragraphArray.push(dWord);
+      drawDWord(father);
       father.setData({
         content: pvList
       })
