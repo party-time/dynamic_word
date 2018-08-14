@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/play/play",
     "pages/new/new",
     "pages/audio/audio",
     "pages/test/test",

@@ -1,0 +1,21 @@
+<view wx:key="unique" disable-scroll="true" wx:for="{{content}}" >
+    <block  wx:if="{{item.type==0}}">
+      <view class="turnLeft" >
+        <block wx:key="unique" wx:for="{{item.paragraphArray}}" wx:for-index="index" wx:for-item="paragraph">
+          <view class="danmuText {{paragraph.animate}}" wx:if="{{index==0}}" wx:key="unique" style="--height:300px;color:{{paragraph.color}};font-size:{{paragraph.size}};margin-top:{{paragraph.marginTop}}" >
+        {{paragraph.info}}
+          </view>
+          <view class="danmuText {{paragraph.animate}}" wx:if="{{index>0}}" wx:key="unique" style="color:{{paragraph.color}};font-size:{{paragraph.size}};margin-top:{{paragraph.marginTop}}" >
+        {{paragraph.info}}
+          </view>
+        </block>
+      </view>
+    </block>
+    <block  wx:if="{{item.type==1}}">
+      <view class="turnRight">
+        <view wx:key="unique" wx:for="{{item.paragraphArray}}" wx:for-item="paragraph">
+        {{paragraph.info}}
+        </view>
+      </view>
+    </block>
+</view>
