@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/webview/webview",
     "pages/play/play",
     "pages/new/new",
     "pages/audio/audio",

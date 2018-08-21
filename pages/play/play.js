@@ -3,6 +3,9 @@ var pvList = new Array();
 var msgCount = 0;
 var audioList = new Array();
 
+//最后一次的高度
+var lastHeight = 300;
+
 const audioCtx = wx.createInnerAudioContext('myAudio');
 
 var dWord = function (info, color, size, animate, type) {
@@ -54,8 +57,8 @@ Page({
 
     audioList.push('http://test.party-time.cn/voice/guahaizi.mp3');
     audioList.push('http://test.party-time.cn/voice/haohao.mp3');
-    //audioList.push('http://test.party-time.cn/voice/mamaduiwoshuo.mp3');
-    //audioList.push('http://test.party-time.cn/voice/mingtiannadiyi.mp3');
+    audioList.push('http://test.party-time.cn/voice/mamaduiwoshuo.mp3');
+    audioList.push('http://test.party-time.cn/voice/mingtiannadiyi.mp3');
     //audioList.push('http://test.party-time.cn/voice/yiwankuai.mp3');
     let father = this;
     audioCtx.autoplay = true;
@@ -70,20 +73,17 @@ Page({
     })
     audioCtx.onEnded(() => {
       if (audioList.length>0){
-        //audioCtx.src = audioList.shift();
-        //drawDWord(father);
+        setTimeout(()=>{
+          audioCtx.src = audioList.shift();
+          drawDWord(father);
+        },1000);
       }
       console.log('播放结束')
     })
 
-    drawDWord(father);
-    setTimeout(function () {
-      father.setData({
-        content: pvList
-      })
-      //audioCtx.src = audioList.shift();
-    }, 1000);
-  
+    //drawDWord(father);
+    loadingDword(father);
+    
   },
 
   
@@ -138,7 +138,46 @@ Page({
   }
 })
 
-
+/*
+* 获取所有元素的高度
+*/
+var loadingDword = function (father){
+  var tempList = new Array();
+  for (var i=0; i < msgList.length;i++){
+    if (msgList[i].type == 2){
+      msgList[i].did = 'dword_'+i;
+      var t_dWord = copy(msgList[i]);
+      t_dWord.animate = '';
+      tempList.push(t_dWord);
+    }
+  }
+  var pv = new pageView(tempList, 0);
+  pvList.push(pv);
+  father.setData({
+    content: pvList
+  },()=>{
+      console.log('赋值成功');
+      var j=0;
+      for (var i = 0; i < msgList.length; i++) {
+        var t_dWord = msgList[i];
+        wx.createSelectorQuery().select('#' + t_dWord.did).boundingClientRect(function (rect) {
+          msgList[j].height = rect.height;
+          console.log(rect.height);
+          ++j;
+          }).exec();
+      }
+      setTimeout(()=>{
+        father.setData({
+          content: null,
+          display: 'none'
+        });
+        pvList = new Array();
+        drawDWord(father);
+        audioCtx.src = audioList.shift();
+      },2000)
+            
+  })
+}
 
 var drawDWord = function (father) {
   var dWord = msgList.shift();
@@ -146,17 +185,18 @@ var drawDWord = function (father) {
   if (null == dWord) {
     return;
   }
-  var time = new Date().getTime();
-  var bid = 'barrage_' + time;
-  dWord.did = bid;
   ++msgCount;
   if (msgCount==1){
     var tempList = new Array();
-    dWord.marginTop='200px';
+    dWord.marginTop = lastHeight+'px';
+    dWord.moveTop = lastHeight+'px';
     tempList.push(dWord);
     var pv = new pageView(tempList, 0);
     pvList.push(pv);
-    drawDWord(father);
+    //drawDWord(father);
+    father.setData({
+      content: pvList
+    })
   }else{
     if(dWord.type==0){
 
@@ -164,15 +204,25 @@ var drawDWord = function (father) {
 
     }else{
       dWord.marginTop = '20px';
-      //pvList[pvList.length - 1].paragraphArray[0].moveTop=
+      lastHeight = lastHeight - dWord.height;
+      console.log('lastHeight' + lastHeight);
+      pvList[pvList.length - 1].paragraphArray[0].moveTop = lastHeight+'px';
+      pvList[pvList.length - 1].paragraphArray[0].animate = ' moveTop';
       pvList[pvList.length - 1].paragraphArray.push(dWord);
-      drawDWord(father);
+      //drawDWord(father);
+
+
       father.setData({
         content: pvList
       })
     }
   }
-  
-  
-  
+}
+
+function copy(obj) {
+  var newobj = {};
+  for (var attr in obj) {
+    newobj[attr] = obj[attr];
+  }
+  return newobj;
 }

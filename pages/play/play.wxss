@@ -13,7 +13,38 @@ page {
     height:100%;
     position:absolute;
     z-index:100;
+    top:0%;
+    left:0%;
     background-color:#000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loading {
+  color:#fff;
+  font-size:60px;
+}
+
+@keyframes pulse {
+  from {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+
+  50% {
+    -webkit-transform: scale3d(1.05, 1.05, 1.05);
+    transform: scale3d(1.05, 1.05, 1.05);
+  }
+
+  to {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+.pulse {
+  animation:pulse 1s linear forwards infinite;
 }
 
 @keyframes bounceInRight {

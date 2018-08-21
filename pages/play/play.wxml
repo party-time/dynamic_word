@@ -1,12 +1,11 @@
-<view class="mask">
+<view class="mask" style='display:{{display}}'>
+  <view class="loading pulse">加载中...</view>
 </view>
-
-
 <view wx:key="unique" disable-scroll="true" wx:for="{{content}}" >
     <block  wx:if="{{item.type==0}}">
       <view class="turnLeft" >
         <block wx:key="unique" wx:for="{{item.paragraphArray}}" wx:for-index="index" wx:for-item="paragraph">
-          <view id="{{paragraph.did}}" class="danmuText {{paragraph.animate}} moveTop" wx:if="{{index==0}}" wx:key="unique" style="color:{{paragraph.color}};font-size:{{paragraph.size}};margin-top:{{paragraph.marginTop}};--div_height:{{paragraph.moveTop}}" >
+          <view id="{{paragraph.did}}" class="danmuText {{paragraph.animate}}" wx:if="{{index==0}}" wx:key="unique" style="color:{{paragraph.color}};font-size:{{paragraph.size}};margin-top:{{paragraph.marginTop}};--div_height:{{paragraph.moveTop}}" >
         {{paragraph.info}}
           </view>
           <view id="{{paragraph.did}}" class="danmuText {{paragraph.animate}}" wx:if="{{index>0}}" wx:key="unique" style="color:{{paragraph.color}};font-size:{{paragraph.size}};margin-top:{{paragraph.marginTop}};" >
@@ -23,3 +22,9 @@
       </view>
     </block>
 </view>
+
+<!--
+<view class="moveTop" style="color:#fff;margin-top:200px;--div_height:90px">
+  asdfasdfasdf
+</view>
+-->
